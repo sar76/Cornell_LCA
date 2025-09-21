@@ -7,34 +7,49 @@ interface LifecycleEmissionsChartProps {
 }
 
 const LifecycleEmissionsChart: React.FC<LifecycleEmissionsChartProps> = ({ emissions }) => {
+  // Calculate total emissions
+  const totalEmissions = emissions.rawMaterials + emissions.manufacturing + emissions.transportation + emissions.use + emissions.endOfLife;
+  
+  // Calculate percentages
+  const rawMaterialsPercent = totalEmissions > 0 ? Math.round((emissions.rawMaterials / totalEmissions) * 100) : 0;
+  const manufacturingPercent = totalEmissions > 0 ? Math.round((emissions.manufacturing / totalEmissions) * 100) : 0;
+  const transportationPercent = totalEmissions > 0 ? Math.round((emissions.transportation / totalEmissions) * 100) : 0;
+  const usePercent = totalEmissions > 0 ? Math.round((emissions.use / totalEmissions) * 100) : 0;
+  const endOfLifePercent = totalEmissions > 0 ? Math.round((emissions.endOfLife / totalEmissions) * 100) : 0;
+
   const data = [
     { 
       name: 'Raw Materials', 
-      value: emissions.rawMaterials, 
+      value: rawMaterialsPercent, 
+      co2Value: emissions.rawMaterials,
       color: '#0ea5e9',
       description: 'Emissions from extraction and processing of raw materials'
     },
     { 
       name: 'Manufacturing', 
-      value: emissions.manufacturing, 
+      value: manufacturingPercent, 
+      co2Value: emissions.manufacturing,
       color: '#22c55e',
       description: 'Emissions from production and manufacturing processes'
     },
     { 
       name: 'Transportation', 
-      value: emissions.transportation, 
+      value: transportationPercent, 
+      co2Value: emissions.transportation,
       color: '#f59e0b',
       description: 'Emissions from transportation and distribution'
     },
     { 
       name: 'Use', 
-      value: emissions.use, 
+      value: usePercent, 
+      co2Value: emissions.use,
       color: '#8b5cf6',
       description: 'Emissions during product use phase'
     },
     { 
       name: 'End of Life', 
-      value: emissions.endOfLife, 
+      value: endOfLifePercent, 
+      co2Value: emissions.endOfLife,
       color: '#ef4444',
       description: 'Emissions from disposal and waste treatment'
     }
@@ -53,7 +68,7 @@ const LifecycleEmissionsChart: React.FC<LifecycleEmissionsChartProps> = ({ emiss
           color: '#1f2937'
         }}>
           <p style={{ fontWeight: '600', color: '#1f2937', margin: '0 0 4px 0' }}>{data.name}</p>
-          <p style={{ fontSize: '14px', color: '#4b5563', margin: '0 0 4px 0' }}>{data.value}% of total emissions</p>
+          <p style={{ fontSize: '14px', color: '#4b5563', margin: '0 0 4px 0' }}>{data.value}% ({data.co2Value.toFixed(2)} kg CO₂-eq)</p>
           <p style={{ fontSize: '12px', color: '#6b7280', margin: '0' }}>{data.description}</p>
         </div>
       );
@@ -88,7 +103,7 @@ const LifecycleEmissionsChart: React.FC<LifecycleEmissionsChartProps> = ({ emiss
               fontSize: '14px',
               color: '#374151',
               fontWeight: '500'
-            }}>{entry.value}</span>
+            }}>{entry.value}%</span>
           </div>
         ))}
       </div>

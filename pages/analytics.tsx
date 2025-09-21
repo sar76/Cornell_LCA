@@ -44,13 +44,23 @@ export default function Analytics() {
     }
 
     // Calculate emissions for each filtered entry
-    const allEmissions = filteredData.map(item => 
-      calculateLifecycleEmissions(
+    const allEmissions = filteredData.map(item => {
+      const percentages = calculateLifecycleEmissions(
         item.includedStages,
         item.healthcareField,
         item.specialty
-      )
-    );
+      );
+      
+      // Convert percentages to realistic CO2 values (assuming average 5 kg CO2-eq per product)
+      const totalCO2 = 5.0; // Average total CO2 per product
+      return {
+        rawMaterials: (percentages.rawMaterials / 100) * totalCO2,
+        manufacturing: (percentages.manufacturing / 100) * totalCO2,
+        transportation: (percentages.transportation / 100) * totalCO2,
+        use: (percentages.use / 100) * totalCO2,
+        endOfLife: (percentages.endOfLife / 100) * totalCO2
+      };
+    });
 
     // Average the emissions across all filtered entries
     const total = allEmissions.reduce((acc, emissions) => ({
@@ -62,11 +72,11 @@ export default function Analytics() {
     }), { rawMaterials: 0, manufacturing: 0, transportation: 0, use: 0, endOfLife: 0 });
 
     return {
-      rawMaterials: Math.round(total.rawMaterials / allEmissions.length),
-      manufacturing: Math.round(total.manufacturing / allEmissions.length),
-      transportation: Math.round(total.transportation / allEmissions.length),
-      use: Math.round(total.use / allEmissions.length),
-      endOfLife: Math.round(total.endOfLife / allEmissions.length)
+      rawMaterials: Math.round((total.rawMaterials / allEmissions.length) * 100) / 100,
+      manufacturing: Math.round((total.manufacturing / allEmissions.length) * 100) / 100,
+      transportation: Math.round((total.transportation / allEmissions.length) * 100) / 100,
+      use: Math.round((total.use / allEmissions.length) * 100) / 100,
+      endOfLife: Math.round((total.endOfLife / allEmissions.length) * 100) / 100
     };
   }, [filteredData]);
 

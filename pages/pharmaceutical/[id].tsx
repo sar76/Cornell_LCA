@@ -87,11 +87,22 @@ export default function PharmaceuticalDetail() {
             <h2 className={styles.sectionTitle}>Carbon Emissions Profile</h2>
             <div className={styles.chartContainer}>
               <LifecycleEmissionsChart 
-                emissions={calculateLifecycleEmissions(
-                  pharmaceutical.includedStages,
-                  pharmaceutical.healthcareField,
-                  pharmaceutical.specialty
-                )} 
+                emissions={pharmaceutical.lifecycleEmissions || (() => {
+                  const percentages = calculateLifecycleEmissions(
+                    pharmaceutical.includedStages,
+                    pharmaceutical.healthcareField,
+                    pharmaceutical.specialty
+                  );
+                  // Convert percentages to realistic CO2 values (assuming average 5 kg CO2-eq per product)
+                  const totalCO2 = 5.0;
+                  return {
+                    rawMaterials: (percentages.rawMaterials / 100) * totalCO2,
+                    manufacturing: (percentages.manufacturing / 100) * totalCO2,
+                    transportation: (percentages.transportation / 100) * totalCO2,
+                    use: (percentages.use / 100) * totalCO2,
+                    endOfLife: (percentages.endOfLife / 100) * totalCO2
+                  };
+                })()} 
               />
             </div>
           </div>

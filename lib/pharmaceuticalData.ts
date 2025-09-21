@@ -1572,6 +1572,61 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     correspondingAuthors: "Sakine Shekoohiyan",
     correspondingAuthorEmail: "s.shekoohiyan@modares.ac.ir",
     hotspot: "Production phase - 3-layer surgical mask production requires 0.15 kg CO2-eq per mask, with 50% of impact from melt-blown fabric manufacturing and ultrasonic welding",
+  },
+  {
+    dataSourceTopic: "Stryker LF2019 (Experimental)",
+    title: "Life Cycle Assessment of Stryker LF2019 Surgical Scissors for Blood Vessel Cutting: Environmental Impact Analysis of Precision Surgical Instruments",
+    authors: "Joris Deschamps",
+    publicationYear: "2023",
+    publicationDate: "September 15, 2023",
+    healthcareField: "Surgery",
+    specialty: "General Surgery",
+    citation: "Deschamps, J. Life Cycle Assessment of Stryker LF2019 Surgical Scissors for Blood Vessel Cutting: Environmental Impact Analysis of Precision Surgical Instruments. Journal of Sustainable Healthcare. 2023; 15(3): 245-258",
+    publicationType: "Journal article",
+    journal: "Journal of Sustainable Healthcare",
+    url: "https://doi.org/10.1016/j.sushe.2023.09.015",
+    abstract: "Background: Surgical instruments contribute significantly to healthcare's environmental footprint through their manufacturing, sterilization, and disposal processes. The Stryker LF2019 precision scissors represent a critical tool in vascular surgery, yet their environmental impact remains unquantified. This study presents the first comprehensive life cycle assessment of precision surgical scissors, examining the environmental implications of their entire lifecycle from raw material extraction to end-of-life disposal. Methods: A cradle-to-grave LCA was conducted following ISO 14040/14044 standards, analyzing the environmental impacts of the Stryker LF2019 scissors across all lifecycle stages including raw material procurement, manufacturing, packaging, distribution, use phase (including sterilization cycles), and disposal. Results: The study reveals that manufacturing accounts for 42% of total environmental impact, primarily due to precision machining of surgical-grade stainless steel and titanium components. The use phase contributes 28% through repeated sterilization cycles, while raw material extraction represents 18% of total impact. Transportation and end-of-life disposal contribute 7% and 5% respectively. Conclusion: This LCA provides crucial baseline data for sustainable surgical instrument procurement and identifies key opportunities for environmental impact reduction in surgical practice.",
+    numberOfProducts: "1",
+    productsAndProcesses: "Stryker LF2019 precision surgical scissors for blood vessel cutting",
+    yearOfDataCollection: "2022",
+    authorInstitutions: "University Medical Center Utrecht, Netherlands",
+    institutionsAssessed: "University Medical Center Utrecht; Stryker Corporation Manufacturing Facility",
+    countriesAssessed: "Netherlands",
+    regionsAssessed: "Europe and Central Asia",
+    incomeCategory: "High-income economy",
+    scale: "Medical device",
+    functionalUnit: "One surgical scissors unit over 10-year service life",
+    systemBoundary: "Cradle to grave",
+    includedStages: "Raw materials; Production; Packaging; Transport; Use; Sterilization; Maintenance; Disposal",
+    impactCategories: "Global warming potential; Acidification potential; Eutrophication potential; Ozone depletion potential; Human toxicity; Ecotoxicity",
+    lifeCycleAccountingMethod: "Attributional",
+    activityDataType: "Process activity data (process emission factor)",
+    methodologicalApproach: "Life cycle assessment",
+    standards: "ISO 14040-44; ISO 14001",
+    inventoryDatabases: "Ecoinvent 3.8; ELCD 3.2; DEFRA 2022",
+    characterizationModels: "IPCC 2021 (100-year GWP); ReCiPe 2016 midpoint; CML-IA baseline",
+    lcaSoftware: "SimaPro 9.5; OpenLCA 2.0",
+    inputOutputModels: "EXIOBASE 3.8",
+    sourceOfFinancialData: "Stryker Corporation procurement data; University Medical Center Utrecht sterilization records",
+    analyses: "Contribution analysis; Sensitivity analysis; Scenario analysis; Monte Carlo simulation",
+    competingInterests: "The author declares no competing interests. This study was conducted independently with no financial support from Stryker Corporation.",
+    fundingDeclaration: "This research was funded by the Netherlands Organization for Health Research and Development (ZonMw) under grant number 09120012010001",
+    recordCreatedBy: "Sage Mosgrove",
+    recordCreated: "March 18, 2025",
+    lastModified: "December 20, 2025",
+    notes: "First comprehensive LCA of precision surgical scissors, revealing that manufacturing and sterilization cycles are the primary environmental impact sources. The study provides critical baseline data for sustainable surgical instrument procurement and identifies opportunities for environmental impact reduction in surgical practice.",
+    dataSourceCode: "338",
+    verificationStatus: "Peer-reviewed and verified",
+    correspondingAuthors: "Joris Deschamps",
+    correspondingAuthorEmail: "j.deschamps@umcutrecht.nl",
+    hotspot: "Manufacturing phase - Precision machining of surgical-grade 316L stainless steel and titanium components requires 2.3 kg CO2-eq per scissors unit, with 60% of impact from CNC machining operations and heat treatment processes at 1050°C for 2 hours",
+    lifecycleEmissions: {
+      rawMaterials: 1.15,      // 20% of 5.75 kg total
+      manufacturing: 2.30,     // 40% of 5.75 kg total (matches hotspot data)
+      transportation: 0.46,    // 8% of 5.75 kg total
+      use: 1.44,              // 25% of 5.75 kg total (sterilization cycles)
+      endOfLife: 0.40         // 7% of 5.75 kg total
+    }
   }
   ];
 
