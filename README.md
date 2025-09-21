@@ -1,4 +1,4 @@
-# VerdantRx - Pharmaceutical LCA Database
+# Cornell_LCA - Pharmaceutical LCA Database
 
 A Next.js application for pharmaceutical Life Cycle Assessment (LCA) studies and environmental impact analysis.
 
