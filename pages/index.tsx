@@ -56,10 +56,17 @@ export default function Directory() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>VerdantRx Directory</h1>
-        <p className={styles.subtitle}>
-          Explore Life Cycle Assessment Studies for Pharmaceutical Products and Processes
-        </p>
+        <div className={styles.headerContent}>
+          <div>
+            <h1 className={styles.title}>VerdantRx Directory</h1>
+            <p className={styles.subtitle}>
+              Explore Life Cycle Assessment Studies for Pharmaceutical Products and Processes
+            </p>
+          </div>
+          <Link href="/analytics" className={styles.analyticsButton}>
+            📊 Analytics Dashboard
+          </Link>
+        </div>
       </div>
 
       <div className={styles.filters}>

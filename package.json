@@ -11,7 +11,9 @@
   "dependencies": {
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "recharts": "^3.2.1",
+    "vis-network": "^10.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -22,4 +24,3 @@
     "typescript": "^5"
   }
 }
-

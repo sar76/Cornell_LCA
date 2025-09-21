@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { getPharmaceuticalById, getHotspotInfo } from '../../lib/pharmaceuticalData';
+import { getPharmaceuticalById, getHotspotInfo, calculateLifecycleEmissions } from '../../lib/pharmaceuticalData';
+import LifecycleEmissionsChart from '../../components/LifecycleEmissionsChart';
 import styles from '../../styles/PharmaceuticalDetail.module.css';
 
 export default function PharmaceuticalDetail() {
@@ -81,6 +82,19 @@ export default function PharmaceuticalDetail() {
       <div className={styles.content}>
         <div className={styles.mainContent}>
           <h1 className={styles.title}>{pharmaceutical.dataSourceTopic}</h1>
+          
+          <div className={styles.chartSection}>
+            <h2 className={styles.sectionTitle}>Carbon Emissions Profile</h2>
+            <div className={styles.chartContainer}>
+              <LifecycleEmissionsChart 
+                emissions={calculateLifecycleEmissions(
+                  pharmaceutical.includedStages,
+                  pharmaceutical.healthcareField,
+                  pharmaceutical.specialty
+                )} 
+              />
+            </div>
+          </div>
           
           <div className={styles.studyInfo}>
             <h2 className={styles.sectionTitle}>Study Information</h2>

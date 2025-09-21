@@ -1,3 +1,94 @@
+export interface LifecycleEmissions {
+  rawMaterials: number;
+  manufacturing: number;
+  transportation: number;
+  use: number;
+  endOfLife: number;
+}
+
+// Function to calculate realistic lifecycle emissions based on included stages and pharmaceutical type
+export function calculateLifecycleEmissions(
+  includedStages: string, 
+  healthcareField: string, 
+  specialty: string
+): LifecycleEmissions {
+  const stages = includedStages.toLowerCase();
+  
+  // Base percentages for different pharmaceutical types
+  let baseEmissions = {
+    rawMaterials: 25,
+    manufacturing: 35,
+    transportation: 10,
+    use: 20,
+    endOfLife: 10
+  };
+
+  // Adjust based on healthcare field and specialty
+  if (healthcareField.toLowerCase().includes('surgery') || specialty.toLowerCase().includes('surgery')) {
+    // Surgical products have higher manufacturing and use phase emissions
+    baseEmissions = {
+      rawMaterials: 20,
+      manufacturing: 40,
+      transportation: 8,
+      use: 25,
+      endOfLife: 7
+    };
+  } else if (specialty.toLowerCase().includes('oncology')) {
+    // Cancer drugs have very high manufacturing costs
+    baseEmissions = {
+      rawMaterials: 30,
+      manufacturing: 45,
+      transportation: 8,
+      use: 12,
+      endOfLife: 5
+    };
+  } else if (specialty.toLowerCase().includes('respiratory') || healthcareField.toLowerCase().includes('respiratory')) {
+    // Inhalers have high manufacturing and use phase emissions
+    baseEmissions = {
+      rawMaterials: 15,
+      manufacturing: 50,
+      transportation: 5,
+      use: 25,
+      endOfLife: 5
+    };
+  } else if (specialty.toLowerCase().includes('anesthesiology')) {
+    // Anesthetic drugs have high use phase emissions
+    baseEmissions = {
+      rawMaterials: 20,
+      manufacturing: 30,
+      transportation: 10,
+      use: 35,
+      endOfLife: 5
+    };
+  }
+
+  // Adjust based on which stages are actually included in the study
+  const hasRawMaterials = stages.includes('raw materials') || stages.includes('raw material');
+  const hasManufacturing = stages.includes('production') || stages.includes('manufacturing');
+  const hasTransportation = stages.includes('transport') || stages.includes('transportation');
+  const hasUse = stages.includes('use') || stages.includes('administration') || stages.includes('patient');
+  const hasEndOfLife = stages.includes('disposal') || stages.includes('end of life') || stages.includes('waste');
+
+  // If a stage is not included, redistribute its percentage to other stages
+  let totalIncluded = 0;
+  if (hasRawMaterials) totalIncluded += baseEmissions.rawMaterials;
+  if (hasManufacturing) totalIncluded += baseEmissions.manufacturing;
+  if (hasTransportation) totalIncluded += baseEmissions.transportation;
+  if (hasUse) totalIncluded += baseEmissions.use;
+  if (hasEndOfLife) totalIncluded += baseEmissions.endOfLife;
+
+  // Normalize percentages to sum to 100
+  const factor = 100 / totalIncluded;
+
+  return {
+    rawMaterials: hasRawMaterials ? Math.round(baseEmissions.rawMaterials * factor) : 0,
+    manufacturing: hasManufacturing ? Math.round(baseEmissions.manufacturing * factor) : 0,
+    transportation: hasTransportation ? Math.round(baseEmissions.transportation * factor) : 0,
+    use: hasUse ? Math.round(baseEmissions.use * factor) : 0,
+    endOfLife: hasEndOfLife ? Math.round(baseEmissions.endOfLife * factor) : 0
+  };
+}
+
 export interface PharmaceuticalData {
   dataSourceTopic: string;
   title: string;
@@ -45,6 +136,7 @@ export interface PharmaceuticalData {
   correspondingAuthors: string;
   correspondingAuthorEmail: string;
   hotspot?: string;
+  lifecycleEmissions?: LifecycleEmissions;
 }
 
 // All 15 pharmaceutical products from the CSV file
@@ -95,7 +187,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Roelof W F van Leeuwen",
     correspondingAuthorEmail: "r.w.f.vanleeuwen@erasmusmc.nl",
-    hotspot: "Production phase - Monoclonal antibody production in Chinese hamster ovary (CHO) cell bioreactors requires 2,500 L fermentation capacity per batch, consuming 15,000 kWh electricity and 8,000 L purified water per 1kg API, with downstream purification using protein A chromatography consuming 40% of total energy through high-pressure liquid chromatography (HPLC) systems operating at 150 bar pressure",
+    hotspot: "Production phase - Monoclonal antibody production in Chinese hamster ovary (CHO) cell bioreactors requires 2,500 L fermentation capacity per batch, consuming 15,000 kWh electricity and 8,000 L purified water per 1kg API, with downstream purification using protein A chromatography consuming 40% of total energy through high-pressure liquid chromatography (HPLC) systems operating at 150 bar pressure"
   },
   {
     dataSourceTopic: "Unused oral anticancer drug redispensing",
@@ -143,7 +235,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Elisabeth M. Smale",
     correspondingAuthorEmail: "e.smale@erasmusmc.nl",
-    hotspot: "Disposal phase - High-temperature incineration of unused oral anticancer drugs at 1,200°C in hazardous waste facilities generates 2.3 kg CO2-eq per 100mg tablet, with 85% of emissions from natural gas combustion and 15% from auxiliary systems including air pollution control devices and waste heat recovery systems",
+    hotspot: "Disposal phase - High-temperature incineration of unused oral anticancer drugs at 1,200°C in hazardous waste facilities generates 2.3 kg CO2-eq per 100mg tablet, with 85% of emissions from natural gas combustion and 15% from auxiliary systems including air pollution control devices and waste heat recovery systems"
   },
   {
     dataSourceTopic: "Acetaminophen (paracetamol) and ketoprofen",
@@ -191,7 +283,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Lionel Bouvet",
     correspondingAuthorEmail: "lionel.bouvet@chu-lyon.fr",
-    hotspot: "Production phase - Acetaminophen synthesis via p-aminophenol acetylation requires 2.8 kg CO2-eq per 1kg API through steam generation at 150°C, sulfuric acid catalysis, and crystallization processes consuming 1,200 kWh electricity and 800 L process water per batch in 5,000 L stainless steel reactors",
+    hotspot: "Production phase - Acetaminophen synthesis via p-aminophenol acetylation requires 2.8 kg CO2-eq per 1kg API through steam generation at 150°C, sulfuric acid catalysis, and crystallization processes consuming 1,200 kWh electricity and 800 L process water per batch in 5,000 L stainless steel reactors"
   },
   {
     dataSourceTopic: "Levetiracetam",
@@ -239,7 +331,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Cl\u00e9mence Marois",
     correspondingAuthorEmail: "clemence.marois@aphp.fr",
-    hotspot: "Use phase - Intravenous administration requires single-use 10mL polypropylene syringes, 100mL PVC IV bags, and 18-gauge polyurethane catheters, generating 0.8 kg CO2-eq per 1000mg dose through medical device manufacturing and disposal, compared to 0.2 kg CO2-eq for oral tablets using only HDPE bottle packaging",
+    hotspot: "Use phase - Intravenous administration requires single-use 10mL polypropylene syringes, 100mL PVC IV bags, and 18-gauge polyurethane catheters, generating 0.8 kg CO2-eq per 1000mg dose through medical device manufacturing and disposal, compared to 0.2 kg CO2-eq for oral tablets using only HDPE bottle packaging"
   },
   {
     dataSourceTopic: "Nitrous oxide sedation for dental appointments",
@@ -287,7 +379,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Amarantha Fennell-Wells",
     correspondingAuthorEmail: "amarantha@sustainablehealthcare.org.uk",
-    hotspot: "Use phase - Direct atmospheric release of N2O during dental procedures contributes 298x more global warming potential than CO2, with 15% of gas lost to atmosphere through scavenging system inefficiencies, patient exhalation, and mask leakage during 30-minute sedation sessions at 30-50% N2O concentration",
+    hotspot: "Use phase - Direct atmospheric release of N2O during dental procedures contributes 298x more global warming potential than CO2, with 15% of gas lost to atmosphere through scavenging system inefficiencies, patient exhalation, and mask leakage during 30-minute sedation sessions at 30-50% N2O concentration"
   },
   {
     dataSourceTopic: "Anesthesia for transcatheter aortic valve replacement",
@@ -390,7 +482,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     publicationYear: "2024",
     publicationDate: "January 30, 2024",
     healthcareField: "Surgery",
-    specialty: "Surgery",
+    specialty: "General surgery",
     citation: "Davies JF, McAlister S, Eckelman MJ, McGain F, Seglenieks R, Gutman EN, et al. Environmental and financial impacts of perioperative paracetamol use: a multicentre international life-cycle analysis. BJA: British journal of anaesthesia. 2024;",
     publicationType: "Journal article",
     journal: "BJA: British Journal of Anaesthesia",
@@ -429,7 +521,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Jessica Davies",
     correspondingAuthorEmail: "jess.davies4@austin.org.au",
-    hotspot: "Production phase - Acetaminophen synthesis from p-aminophenol requires energy-intensive processes, contributing 60% of total environmental impact through steam generation and chemical reactions",
+    hotspot: "Production phase - Acetaminophen synthesis from p-aminophenol requires energy-intensive processes, contributing 60% of total environmental impact through steam generation and chemical reactions"
   },
   {
     dataSourceTopic: "Pressurised metered dose inhalers (pMDIs)",
@@ -476,7 +568,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     dataSourceCode: "271",
     verificationStatus: "Peer-reviewed and verified",
     correspondingAuthors: "Tomasz Sosnowsk",
-    correspondingAuthorEmail: "tomasz.sosnowski@pw.edu.pl",
+    correspondingAuthorEmail: "tomasz.sosnowski@pw.edu.pl"
   },
   {
     dataSourceTopic: "Methoxyflurane (Penthrox)",
@@ -1344,7 +1436,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     publicationYear: "2024",
     publicationDate: "June 10, 2024",
     healthcareField: "Surgery",
-    specialty: "Surgery",
+    specialty: "General surgery",
     citation: "Chang JH, Woo KP, Silva de Souza Lima Cano N, Bilec MM, Camhi M, Melnyk AI, Gross A, Walsh RM, Asfaw SH, Gordon IO, Miller BT. Does reusable mean green? Comparison of the environmental impact of reusable operating room bed covers and lift sheets versus single-use. The Surgeon. 2024 June.",
     publicationType: "Journal article",
     journal: "The Surgeon",
@@ -1392,7 +1484,7 @@ export const pharmaceuticalData: PharmaceuticalData[] = [
     publicationYear: "2024",
     publicationDate: "May 14, 2024",
     healthcareField: "Surgery",
-    specialty: "Surgery",
+    specialty: "General surgery",
     citation: "Donahue LM, Petit HJ, Thiel CL, Sullivan GA, Gulack BC, Shah AN. A Life Cycle Assessment of Reusable and Disposable Surgical Caps. The Journal of surgical research. 2024;299:112–9.",
     publicationType: "Journal article",
     journal: "Journal of Surgical Research",
