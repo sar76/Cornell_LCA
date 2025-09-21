@@ -1,70 +1,66 @@
 .container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: transparent;
   padding: 2rem;
 }
 
 .header {
   margin-bottom: 3rem;
-  color: white;
-}
-
-.headerContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.headerContent > div {
+  color: #1e293b;
   text-align: center;
-  flex: 1;
-  min-width: 300px;
 }
 
 .title {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #1e293b;
+  text-shadow: none;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  opacity: 0.9;
+  color: #64748b;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
 .analyticsButton {
-  background: white;
-  color: #667eea;
+  background: var(--primary-600);
+  color: white;
   padding: 1rem 2rem;
-  border-radius: 25px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  border: 1px solid var(--primary-700);
 }
 
 .analyticsButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  background: #f8fafc;
+  box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+  background: var(--primary-700);
+}
+
+.analyticsButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
 }
 
 .filters {
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--neutral-200);
 }
 
 .searchContainer {
@@ -74,18 +70,19 @@
 .searchInput {
   width: 100%;
   padding: 1rem 1.5rem;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
+  border: 2px solid var(--neutral-300);
+  border-radius: 8px;
   font-size: 1rem;
   transition: all 0.3s ease;
-  background: #f9fafb;
+  background: var(--neutral-50);
+  color: var(--neutral-800);
 }
 
 .searchInput:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: var(--primary-500);
   background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
 }
 
 .categoryFilter {
@@ -96,7 +93,7 @@
   display: block;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #374151;
+  color: var(--neutral-700);
   font-size: 1.1rem;
 }
 
@@ -108,18 +105,20 @@
 
 .categoryButton {
   padding: 0.75rem 1.5rem;
-  border: 2px solid;
-  border-radius: 25px;
+  border: 2px solid var(--neutral-300);
+  border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: transparent;
-  color: #374151;
+  background: var(--neutral-50);
+  color: var(--neutral-700);
 }
 
 .categoryButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--neutral-100);
+  border-color: var(--neutral-400);
 }
 
 .categoryButtonActive {
@@ -134,7 +133,7 @@
 }
 
 .resultsCount {
-  color: white;
+  color: #64748b;
   font-size: 1.1rem;
   font-weight: 500;
   opacity: 0.9;
@@ -150,19 +149,21 @@
 
 .card {
   background: white;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
   height: 100%;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--neutral-200);
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-color: var(--primary-300);
 }
 
 .cardHeader {
@@ -246,7 +247,7 @@
 
 .noResults {
   text-align: center;
-  color: white;
+  color: #64748b;
   padding: 4rem 2rem;
 }
 

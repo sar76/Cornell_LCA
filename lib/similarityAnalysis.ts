@@ -96,13 +96,13 @@ function calculateSimilarity(product1: any, product2: any): number {
 // Get color based on healthcare field
 function getHealthcareFieldColor(healthcareField: string): string {
   const colors: { [key: string]: string } = {
-    'Medicine': '#3B82F6',
-    'Pharmacy': '#10B981',
-    'Dentistry': '#F59E0B',
-    'Healthcare': '#8B5CF6',
-    'Surgery': '#EF4444'
+    'Medicine': '#0ea5e9',
+    'Pharmacy': '#22c55e',
+    'Dentistry': '#f59e0b',
+    'Healthcare': '#8b5cf6',
+    'Surgery': '#ef4444'
   };
-  return colors[healthcareField] || '#6B7280';
+  return colors[healthcareField] || '#64748b';
 }
 
 // Get node size based on manufacturing emissions (higher manufacturing = larger node)
@@ -148,7 +148,7 @@ export function generateNetworkData(): NetworkData {
       
       if (similarity >= similarityThreshold) {
         const edgeWidth = Math.max(1, similarity * 5); // Scale edge width based on similarity
-        const edgeColor = similarity > 0.7 ? '#10B981' : similarity > 0.5 ? '#F59E0B' : '#6B7280';
+        const edgeColor = similarity > 0.7 ? '#22c55e' : similarity > 0.5 ? '#f59e0b' : '#64748b';
         
         edges.push({
           from: `product_${i}`,

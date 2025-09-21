@@ -280,27 +280,27 @@ const NetworkGraph: React.FC<NetworkGraphProps> = ({ data }) => {
           <div className={styles.legend}>
             <h4 className={styles.legendTitle}>Legend</h4>
             <div className={styles.legendItem}>
-              <div className={styles.legendColor} style={{ backgroundColor: '#3B82F6' }}></div>
+              <div className={styles.legendColor} style={{ backgroundColor: '#0ea5e9' }}></div>
               <span>Medicine</span>
             </div>
             <div className={styles.legendItem}>
-              <div className={styles.legendColor} style={{ backgroundColor: '#10B981' }}></div>
+              <div className={styles.legendColor} style={{ backgroundColor: '#22c55e' }}></div>
               <span>Pharmacy</span>
             </div>
             <div className={styles.legendItem}>
-              <div className={styles.legendColor} style={{ backgroundColor: '#F59E0B' }}></div>
+              <div className={styles.legendColor} style={{ backgroundColor: '#f59e0b' }}></div>
               <span>Dentistry</span>
             </div>
             <div className={styles.legendItem}>
-              <div className={styles.legendColor} style={{ backgroundColor: '#8B5CF6' }}></div>
+              <div className={styles.legendColor} style={{ backgroundColor: '#8b5cf6' }}></div>
               <span>Healthcare</span>
             </div>
             <div className={styles.legendItem}>
-              <div className={styles.legendColor} style={{ backgroundColor: '#EF4444' }}></div>
+              <div className={styles.legendColor} style={{ backgroundColor: '#ef4444' }}></div>
               <span>Surgery</span>
             </div>
             <div className={styles.legendItem}>
-              <div className={styles.legendColor} style={{ backgroundColor: '#6B7280' }}></div>
+              <div className={styles.legendColor} style={{ backgroundColor: '#64748b' }}></div>
               <span>Other</span>
             </div>
           </div>

@@ -11,31 +11,31 @@ const LifecycleEmissionsChart: React.FC<LifecycleEmissionsChartProps> = ({ emiss
     { 
       name: 'Raw Materials', 
       value: emissions.rawMaterials, 
-      color: '#3B82F6',
+      color: '#0ea5e9',
       description: 'Emissions from extraction and processing of raw materials'
     },
     { 
       name: 'Manufacturing', 
       value: emissions.manufacturing, 
-      color: '#10B981',
+      color: '#22c55e',
       description: 'Emissions from production and manufacturing processes'
     },
     { 
       name: 'Transportation', 
       value: emissions.transportation, 
-      color: '#F59E0B',
+      color: '#f59e0b',
       description: 'Emissions from transportation and distribution'
     },
     { 
       name: 'Use', 
       value: emissions.use, 
-      color: '#8B5CF6',
+      color: '#8b5cf6',
       description: 'Emissions during product use phase'
     },
     { 
       name: 'End of Life', 
       value: emissions.endOfLife, 
-      color: '#EF4444',
+      color: '#ef4444',
       description: 'Emissions from disposal and waste treatment'
     }
   ];
