@@ -1,0 +1,282 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.filters {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.searchContainer {
+  margin-bottom: 2rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.categoryFilter {
+  margin-bottom: 1rem;
+}
+
+.filterLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #374151;
+  font-size: 1.1rem;
+}
+
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.categoryButton {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid;
+  border-radius: 25px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #374151;
+}
+
+.categoryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.categoryButtonActive {
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.resultsInfo {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.resultsCount {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cardHeader {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.categoryBadge,
+.specialtyBadge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+}
+
+.cardContent {
+  padding: 0 1.5rem 1rem 1.5rem;
+  flex-grow: 1;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.cardAbstract {
+  color: #6b7280;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.cardFooter {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  border-top: 1px solid #f3f4f6;
+  margin-top: auto;
+}
+
+.cardMeta {
+  margin-bottom: 1rem;
+}
+
+.metaItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.metaLabel {
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.metaValue {
+  color: #374151;
+  font-weight: 500;
+}
+
+.cardActions {
+  text-align: right;
+}
+
+.viewDetails {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.card:hover .viewDetails {
+  color: #5a67d8;
+}
+
+.noResults {
+  text-align: center;
+  color: white;
+  padding: 4rem 2rem;
+}
+
+.noResults h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.noResults p {
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .filters {
+    padding: 1.5rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .categoryButtons {
+    justify-content: center;
+  }
+  
+  .categoryButton {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardHeader {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+  
+  .cardContent {
+    padding: 0 1rem 0.5rem 1rem;
+  }
+  
+  .cardFooter {
+    padding: 0.75rem 1rem 1rem 1rem;
+  }
+  
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+  
+  .cardAbstract {
+    font-size: 0.9rem;
+  }
+}
