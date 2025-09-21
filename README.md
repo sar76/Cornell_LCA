@@ -52,7 +52,7 @@ npm run dev
 - Modern React with TypeScript
 - Next.js framework for optimal performance
 - Responsive design
-- VerdantRx branding
+- VerdentRx branding
 - Pharmaceutical LCA database with 15+ studies
 - Environmental impact analysis tools
 

@@ -56,7 +56,7 @@ export default function Directory() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>VerdantRx Directory</h1>
+        <h1 className={styles.title}>VerdentRx Directory</h1>
         <p className={styles.subtitle}>
           Explore Life Cycle Assessment Studies for Pharmaceutical Products and Processes
         </p>
